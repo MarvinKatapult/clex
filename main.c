@@ -10,7 +10,7 @@
 #define MAX_TOKEN_SIZE 1048
 
 #define IS_WHITE_SPACE_TOKEN(C) (C == ' ' || C == '\n' || C == '\t' || c == '\0')
-#define IS_OPERATOR(C)     (C == '+' \
+#define IS_TERMINATING_TOKEN(C)     (C == '+' \
                          || C == '-' \
                          || C == '*' \
                          || C == '/' \
@@ -70,7 +70,7 @@ bool tokenize(const char * expression, StrVec * tokens) {
     for (size_t i = 0; i < len; i++) {
         char c = expression[i];
         const bool whitespace = IS_WHITE_SPACE_TOKEN(c);
-        const bool operator = IS_OPERATOR(c);
+        const bool operator = IS_TERMINATING_TOKEN(c);
         assert(!(whitespace && operator));
 
         if (whitespace) {
